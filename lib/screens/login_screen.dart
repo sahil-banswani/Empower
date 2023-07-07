@@ -307,9 +307,9 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Life Coach'),
+        title: const Text('Empower'),
         centerTitle: true,
-        // backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF08154A),
       ),
       drawer: Drawer(
         child: Container(
@@ -393,7 +393,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               .hasMatch(val)) {
                             return 'Please enter a valid email address';
                           }
-                          //return null;
                           return null;
                         },
                         decoration: const InputDecoration(

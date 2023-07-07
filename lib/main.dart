@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_coach/screens/tab_login_screen.dart';
+import 'package:life_coach/screens/tab_screens_layout.dart';
 import '../responsiveLayout/responsive.dart';
 import '../screens/login_screen.dart';
 
@@ -16,9 +17,12 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      // theme: ThemeData(
+      //   primarySwatch:
+      //   ),
       home: ResponsiveLayout(
         mobileScreenLayout: LoginScreen(),
-        tabScreenLayout: TabLoginScreen(),
+        tabScreenLayout: TabScreenLayout(),
       ),
     );
   }

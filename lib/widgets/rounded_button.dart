@@ -9,7 +9,7 @@ class RoundedButton extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.onPress,
-      this.color = Colors.blue,
+      this.color = const Color(0xFF08154A),
       this.textColor = Colors.white,
       this.loading = false})
       : super(key: key);
@@ -45,6 +45,28 @@ class RoundedButton extends StatelessWidget {
                     style: TextStyle(color: textColor),
                   ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class Button extends StatelessWidget {
+  final String text;
+  const Button({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 35,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
       ),
     );
