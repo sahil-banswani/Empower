@@ -1,4 +1,4 @@
-# life_coach
+# Empower
 
 A new Flutter project.
 
