@@ -42,17 +42,23 @@ class _TabScreenLayoutState extends State<TabScreenLayout> {
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
-                        const Row(
+                        Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 20.0,
                               backgroundImage:
                                   AssetImage('lib/images/logo.png'),
                             ),
-                            SizedBox(width: 20),
-                            Button(text: 'Subscribe'),
-                            SizedBox(width: 3),
-                            Button(text: 'LogOut'),
+                            const SizedBox(width: 20),
+                            Button(
+                              text: 'Subscribe',
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: 3),
+                            Button(
+                              text: 'LogOut',
+                              onPressed: () {},
+                            ),
                           ],
                         ),
                         SizedBox(

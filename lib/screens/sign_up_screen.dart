@@ -66,7 +66,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         title: const Text('Empower'),
         centerTitle: true,
-        // backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF08154A),
       ),
       drawer: Drawer(
         child: Container(

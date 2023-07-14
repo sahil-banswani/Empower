@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:life_coach/screens/tab_login_screen.dart';
+import 'package:life_coach/responsiveLayout/responsive.dart';
+import 'package:life_coach/screens/enrollment_screen.dart';
+import 'package:life_coach/screens/login_screen.dart';
 import 'package:life_coach/screens/tab_screens_layout.dart';
-import '../responsiveLayout/responsive.dart';
-import '../screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       //   primarySwatch:
       //   ),
       home: ResponsiveLayout(
-        mobileScreenLayout: LoginScreen(),
+        mobileScreenLayout: EnrollmentLayout(),
         tabScreenLayout: TabScreenLayout(),
       ),
     );

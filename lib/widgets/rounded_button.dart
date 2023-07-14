@@ -53,20 +53,21 @@ class RoundedButton extends StatelessWidget {
 
 class Button extends StatelessWidget {
   final String text;
-  const Button({super.key, required this.text});
+  final VoidCallback onPressed;
+  const Button({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
-          style: const TextStyle(color: Colors.white, fontSize: 18),
+          style: const TextStyle(color: Colors.white, fontSize: 14),
         ),
       ),
     );
