@@ -4,7 +4,11 @@ import 'package:life_coach/widgets/send_email.dart';
 import '../widgets/rounded_button.dart';
 
 class EnrollmentLayout extends StatelessWidget {
-  const EnrollmentLayout({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
+
+  EnrollmentLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +85,65 @@ class EnrollmentLayout extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  SendEmail(),
-                ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    SendEmail(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(8),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade800),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: TextField(
+                            controller: userNameController,
+                            autocorrect: true,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(8),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade800),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: TextField(
+                            controller: userNameController,
+                            autocorrect: true,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(8),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade800),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: TextField(
+                            controller: userNameController,
+                            autocorrect: true,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
