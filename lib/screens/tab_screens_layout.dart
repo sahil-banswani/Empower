@@ -1,121 +1,44 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math show pi;
-import 'package:collapsible_sidebar/collapsible_sidebar.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:cookie_jar/cookie_jar.dart';
-// import 'dart:convert';
-// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-// import 'package:flutter_tts/flutter_tts.dart';
-// import 'package:html/parser.dart' as htmlParser;
-// import '../widgets/rounded_button.dart';
+import 'package:life_coach/screens/screen%20for%20drawer/leadership_screen.dart';
+import 'package:life_coach/screens/tab_login_screen.dart';
+import 'package:life_coach/widgets/collabsible.dart';
+import '../responsiveLayout/responsive.dart';
+import 'login_screen.dart';
+import 'screen for drawer/life_coach_screen.dart';
+import 'screen for drawer/marketing_screens.dart';
+import 'screen for drawer/stratergy&potfoilio_scree.dart';
 
 class TabScreenLayout extends StatefulWidget {
-  const TabScreenLayout({super.key});
+  const TabScreenLayout({Key? key}) : super(key: key);
 
   @override
   State<TabScreenLayout> createState() => _TabScreenLayoutState();
 }
 
 class _TabScreenLayoutState extends State<TabScreenLayout> {
-  late List<CollapsibleItem> _items;
-  late String _headline;
-  final AssetImage _avatarImg = const AssetImage('assets/images/logo.png');
+  int selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _items = _generateItems;
-    _headline = _items.firstWhere((item) => item.isSelected).text;
-  }
-
-  List<CollapsibleItem> get _generateItems {
-    return [
-      CollapsibleItem(
-          text: 'Life Coach | Job Coach | Enterpreneurship',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Life Coach | Job Coach | Enterpreneurship';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Law | Ethics | Compliance | Values',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Law | Ethics | Compliance | Values';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Leadership | CSR | Administration',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Leadership | CSR | Administration';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Buiness Economics | Buiness Statistics',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Buiness Economics | Buiness Statistics';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Accounting | Auditing | Taxation',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Accounting | Auditing | Taxation';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Finance | FP&A | Social Investment',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Finance | FP&A | Social Investment';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Innovation | Technology',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Innovation | Technology';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Statergy & Potfolio',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Statergy & Potfolio';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Marketing',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Marketing';
-            });
-          }),
-      CollapsibleItem(
-          text: 'Buiness Devlopemnet | Customer Relationship',
-          icon: Icons.assessment,
-          onPressed: () {
-            setState(() {
-              _headline = 'Buiness Devlopemnet | Customer Relationship';
-            });
-          }),
-    ];
-  }
+  List<Widget> screens = [
+    const Center(
+      child: Text(
+        "Dashboard",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 50,
+          color: Color(0xFF08154A),
+        ),
+      ),
+    ),
+    const LifeCoachScreen(),
+    const LeadershipScreen(),
+    const StrategyScreen(),
+    // const MarketingScreen(),
+    //   BusinessDevelopmentScreen(),
+    // Add more screens for other list tile indices
+  ];
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Empower'),
@@ -123,219 +46,288 @@ class _TabScreenLayoutState extends State<TabScreenLayout> {
         backgroundColor: const Color(0xFF08154A),
         elevation: 0,
       ),
-      body: CollapsibleSidebar(
-        isCollapsed: true,
-        avatarImg: _avatarImg,
-        items: _items,
-        title: 'Dignity of Nobels',
-        onTitleTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Collapsible Sidebar'),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 4,
+            child: Container(
+              color: const Color(0xFF08154A),
+              child: SafeArea(
+                  child: ListTileTheme(
+                      child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: ClipOval(
+                          child: Stack(
+                            children: [
+                              const CircleAvatar(
+                                radius: 40.0,
+                                backgroundImage:
+                                    AssetImage('assets/images/logo.png'),
+                              ),
+                              Positioned(
+                                right: -4.0,
+                                bottom: -4.0,
+                                child: IconButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SizedBox(
+                                          height: 200.0,
+                                          child: Column(
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  // Handle "Notification" list item click
+                                                  Navigator.pop(
+                                                      context); // Close the bottom sheet
+                                                },
+                                                title:
+                                                    const Text('Notification'),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  // Handle "Push Notification" list item click
+                                                  Navigator.pop(
+                                                      context); // Close the bottom sheet
+                                                },
+                                                title: const Text(
+                                                    'No Notification'),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  // Handle "All Notification" list item click
+                                                  Navigator.pop(
+                                                      context); // Close the bottom sheet
+                                                },
+                                                title: const Text('View All'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.doorbell_outlined,
+                                    color: Colors.black,
+                                    size: 20.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 1.0,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TabSubscribe()));
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Container(
+                                width: 100.0,
+                                height: 40.0,
+                                color: Colors.indigo,
+                                child: const Center(
+                                  child: Text(
+                                    'SUBSCRIBE',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ResponsiveLayout(
+                                              tabScreenLayout: TabLoginScreen(),
+                                              mobileScreenLayout:
+                                                  LoginScreen())));
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Material(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: const BorderSide(
+                                    color: Colors.indigo,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Container(
+                                  width: 90.0,
+                                  height: 40.0,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white54,
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'LOGOUT',
+                                      style: TextStyle(
+                                        color: Colors.indigo,
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10.0),
+                  Container(
+                    height: 1.0,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: Colors.black,
+                          width: 1.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Expanded(
+                    child: SingleChildScrollView(
+                      child: CollapsibleDrawer(),
+                    ),
+                  ),
+                ],
+              ))),
             ),
-          );
-        },
-        body: _body(size, context),
-        backgroundColor: Color(0xFF08154A),
-        selectedTextColor: Colors.limeAccent,
-        textStyle: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
-        titleStyle: const TextStyle(
-            fontSize: 20,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold),
-        toggleTitleStyle: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        sidebarBoxShadow: const [
-          BoxShadow(
-              color: Colors.indigo,
-              blurRadius: 20,
-              spreadRadius: 0.01,
-              offset: Offset(3, 3)),
-          BoxShadow(
-            color: Colors.green,
-            blurRadius: 50,
-            spreadRadius: 0.01,
-            offset: Offset(3, 3),
+          ),
+          Expanded(
+            flex: 6,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: IndexedStack(
+                index: selectedIndex,
+                children: screens,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _body(Size size, BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.blueGrey[50],
-      child: Center(
-        child: Transform.rotate(
-          angle: math.pi / 2,
-          child: Transform.translate(
-            offset: Offset(-size.height * 0.3, -size.width * 0.23),
-            child: Text(
-              _headline,
-              style: Theme.of(context).textTheme.headline1,
-              overflow: TextOverflow.visible,
-              softWrap: false,
-            ),
-          ),
+class TabSubscribe extends StatelessWidget {
+  final List<String> headings = [
+    'PWB-Social Impact Partners ( Organizations )',
+    'PWB-Individual',
+    'Corporate Social Responsibility (CSR) Executive',
+    'Social Investors',
+    'Students',
+    'Customers Recruiting',
+    'Service Provider',
+    'Service Provider University',
+    'Service Provider Professional',
+    'Service Provider Interviewer',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Subscription Plans'),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: Colors.black,
+      body: GridView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: 10,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 16.0,
+          childAspectRatio: 1.0,
         ),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(50.0),
+              border: Border.all(
+                color: Colors.grey,
+                width: 2.0,
+              ),
+            ),
+            child: ListTile(
+              onTap: () {
+                // Navigator.push(
+                //   context,
+                // MaterialPageRoute(
+                //   builder: (context) => AnotherScreen(
+                //     heading: headings[index],
+                //   ),
+                // ),
+                // );
+              },
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20.0),
+                  Center(
+                    child: Text(
+                      headings[index],
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30.0),
+                  const Text(
+                    'Social impact can be defined as the effect on people and communities that happens as a result of an action or inaction, an activity, project, programme or policy.For the plans',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 }
-      // body: Row(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   // mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     Expanded(
-      //       flex: 4,
-      //       child: Container(
-      //         color: const Color(0xFF08154A),
-      //         child: Padding(
-      //           padding: const EdgeInsets.only(top: 20, left: 20),
-      //           child: SizedBox(
-      //             height: double.infinity,
-      //             child: SingleChildScrollView(
-      //               scrollDirection: Axis.vertical,
-      //               child: Column(
-      //                 children: [
-      //                   Row(
-      //                     children: [
-      //                       const CircleAvatar(
-      //                         radius: 20.0,
-      //                         backgroundImage:
-      //                             AssetImage('lib/images/logo.png'),
-      //                       ),
-      //                       const SizedBox(width: 20),
-      //                       Button(
-      //                         text: 'Subscribe',
-      //                         onPressed: () {},
-      //                       ),
-      //                       const SizedBox(width: 3),
-      //                       Button(
-      //                         text: 'LogOut',
-      //                         onPressed: () {},
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   SizedBox(
-      //                     height: size * 0.03,
-      //                   ),
-      //                   const Divider(
-      //                     color: Colors.grey,
-      //                     height: 1,
-      //                     thickness: 2,
-      //                   ),
-      //                   ListTileTheme(
-      //                     textColor: Colors.white,
-      //                     iconColor: Colors.white,
-      //                     child: Column(
-      //                       children: [
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.person),
-      //                           title: const Text(
-      //                               'Life Coach | Job Coach | Enterpreneurship'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.account_balance),
-      //                           title: const Text(
-      //                               'Law | Ethics | Compliance | Values'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.leaderboard),
-      //                           title: const Text(
-      //                               'Leadership | CSR | Administration'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.business),
-      //                           title: const Text(
-      //                               'Buiness Economics | Buiness Statistics'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.account_balance),
-      //                           title: const Text(
-      //                               'Accounting | Auditing | Taxation'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.find_replace_rounded),
-      //                           title: const Text(
-      //                               'Finance | FP&A | Social Investment'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.inventory),
-      //                           title: const Text('Innovation | Technology'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.point_of_sale),
-      //                           title: const Text('Statergy & Potfolio'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.shopping_bag),
-      //                           title: const Text('Marketing'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.developer_board),
-      //                           title: const Text(
-      //                               'Buiness Devlopemnet | Customer Relationship'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading:
-      //                               const Icon(Icons.delivery_dining_rounded),
-      //                           title: const Text(
-      //                               'Supply Chain Management | Delivery'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.settings),
-      //                           title: const Text('Operations | Logistics'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.settings),
-      //                           title: const Text('Human Resouces Managemnet'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.settings),
-      //                           title: const Text(
-      //                               'Mergers & Acquisition | Valuations'),
-      //                         ),
-      //                         ListTile(
-      //                           onTap: () {},
-      //                           leading: const Icon(Icons.settings),
-      //                           title: const Text(
-      //                               'Recognize | Celebrate | Giving Back'),
-      //                         ),
-      //                       ],
-      //                     ),
-      //                   )
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //     Expanded(
-      //       flex: 7,
-      //       child: Center(
-      //         child: Text('Hey!!'),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-    
