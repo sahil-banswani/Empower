@@ -1,6 +1,7 @@
 # Empower
 
 A new Flutter project.
+this is the second project of my internship
 
 ## Getting Started
 
